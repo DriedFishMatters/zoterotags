@@ -1,0 +1,4 @@
+pyzotero
+cachier
+pandas
+matplotlib
