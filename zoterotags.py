@@ -59,7 +59,7 @@ sys.stderr = sys.stdout
 
 
 HTML_HEADER = """<html><head>
-<link rel="stylesheet" href="/static/tachyons.min.css"/>
+<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>th, td{padding:0.5em;}</style>
 </head>
@@ -193,7 +193,8 @@ def parse_query():
     q = cgi.FieldStorage(keep_blank_values=True)
     # fields that take a single value
     simplefields = [ 'edit_query', 'format', 'values_type', 'graph_format',
-        'stack', 'purge', 'purge_data', 'purge_images', 'image_type', 'transpose', 'sort', 'subplots', 'square', 'label_bars', 'label_int']
+        'stack', 'purge', 'purge_data', 'purge_images', 'image_type', 'transpose', 
+        'sort', 'subplots', 'square', 'label_bars', 'label_int']
     # fields that should be split on newlines
     listfields = ['filter', 'tags_x', 'tags_y']
     params = {}
@@ -232,7 +233,8 @@ def get_count(tags_x, tag_filter, rows=True):
 def query_zotero(tags):
     """Query Zotero.
 
-    The tags parameter is an immutable set, so the function can be hashed and stored in a cache. The cache does not expire, so it needs to be invalidated using the purge() method."""
+    The tags parameter is an immutable set, so the function can be hashed and stored in a cache. 
+    The cache does not expire, so it needs to be invalidated using the purge() method."""
     zot = zotero.Zotero(LIBRARY_ID, LIBRARY_TYPE)
     try:
         t = zot.everything(zot.items(tag=tags, format='versions', limit=None))
@@ -359,7 +361,9 @@ def build_graph(p, path):
             NUM = "{:.1f}"
         for patch in u.patches:
             y_offset = patch.get_height() / 2
-            u.annotate(NUM.format(patch.get_width()), (patch.get_x() + patch.get_width(), patch.get_y() + patch.get_height() / 2), xytext=(2,0), textcoords='offset points', fontsize=7, va='center')
+            u.annotate(NUM.format(patch.get_width()), (patch.get_x() + patch.get_width(), 
+                                                       patch.get_y() + patch.get_height() / 2), xytext=(2,0), 
+                                                       textcoords='offset points', fontsize=7, va='center')
 
 
     # multiple columns with long labels cause the graph itself to get narrower
